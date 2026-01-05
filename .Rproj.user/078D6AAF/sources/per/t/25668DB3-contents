@@ -432,7 +432,7 @@ google_kl_cuisine |>
 
 ## Comparisons of average ratings
 
-With reference to the histograms below, that ratings are skewed towards the higher end: the mean rating of restaurants on Google is **`r summary_stats |> filter(source == "Google") |> pull(mean_rating) |> round(2)`** and the mean rating on Trip Advisor is **`r summary_stats |> filter(source == "Trip Advisor") |> pull(mean_rating) |> round(2)`**. The median and mode for both datasets is **5**.  
+With reference to the plots below, ratings are skewed towards the higher end: the mean rating of restaurants on Google is **`r summary_stats |> filter(source == "Google") |> pull(mean_rating) |> round(2)`** and the mean rating on Trip Advisor is **`r summary_stats |> filter(source == "Trip Advisor") |> pull(mean_rating) |> round(2)`**. The median and mode for both datasets is **5**.  
 
 It really could be said that the default review rating is five stars. This means that restaurant reviews on these platforms are quite lenient. It is hard for me to believe that half of all reviews were about truly exceptional dining experiences: **`r round(google_kl_cuisine |> filter(rating == 5) |> nrow() / nrow(google_kl_cuisine) * 100, 2)`%** of all ratings in the Google dataset for the Klang Valley (KL, PJ and Shah Alam in the datasets) are five stars; in Trip Advisor, it was **`r round(trip_kl_cuisine |> filter(rating == 5) |> nrow() / nrow(trip_kl_cuisine) * 100, 2)`%**. 
 
@@ -531,7 +531,7 @@ trip_kl_cuisine |>
   plot_annotation(title = "Klang Valley restaurants and average ratings") +
   plot_layout(guides = "collect") & theme(legend.position = "bottom")
 
-ggsave("./plots/cuisine_comparison_trip_google.png", height = 7, width = 11, units = "in")
+# ggsave("./plots/comparison_average_ratings.png", height = 5, width = 8, units = "in")
 
 ```
 
@@ -614,7 +614,7 @@ google_kl_cuisine |>
        subtitle = "Only restaurants in the Klang Valley. Total number of reviews at the end of each bar.", 
        fill = "Mean\nrating")
   
-
+# ggsave("./plots/cuisine_comparison.png", height = 5, width = 7, units = "in")
 ```
 
 <br><br><br>

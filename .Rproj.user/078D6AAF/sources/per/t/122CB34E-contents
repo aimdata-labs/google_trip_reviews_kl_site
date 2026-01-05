@@ -1,7 +1,9 @@
 ---
-title: "Google restaurant reviews in Kuala Lumpur, Petaling Jaya and Shah Alam, Malaysia"
+title: "How useful are restaurant reviews? Google and Trip Advisor reviews in the Klang Valley, Malaysia"
 subtitle: "Part two"
-author: "AIMdata"
+author: "Sean Ng"
+organization: "AIMdata"
+date-modified: "26 December 2025"
 execute: 
   echo: false
 ---
@@ -88,39 +90,270 @@ trip_rating_bigrams <- trip_kl_cuisine |>
 
 ```
 
+## Words
+
+In this second part of our analysis of 
+
+As noted in the previous part, Chinese and Casual Western restaurants -- overall -- have the highest number of reviews and some of the lowest mean ratings across all cuisines. 
+
+## One-star reviews by cuisine
+
+Let's start by making use of the cuisine column we created in the previous section and look at the relationship between words in the Google reviews dataset. Below, is a network graph of words used in one-star reviews of Chinese restaurants in the Klang Valley. 
+
+<br>
+
+```{r}
+clean_common_foods <- function(tbl){
+  tbl |> 
+    mutate(review = str_replace_all(review, "Dim sum|Dim Sum|dim sum", "dimsum"), 
+         review = str_replace_all(review, "Tom Yam|Tom Yum|Tom yam|Tom yum|tom yam|tom yum", "tomyum"), 
+         review = str_replace_all(review, "Char Siew|Char siew|char siew", "charsiew"), 
+         review = str_replace_all(review, "Hokkien mee|Hokkien Mee|hokkien mee", "hokkienmee"), 
+         review = str_replace_all(review, "Roast Duck|Roast duck|roast duck", "roastduck"),
+         review = str_replace_all(review, "Fried Rice|Fried rice|fried rice", "friedrice"), 
+         review = str_replace_all(review, "Roast pork|roast pork|Roast Pork", "roastpork"), 
+         review = str_replace_all(review, "Mee hoon|mee hoon|Bee hoon|bee hoon|Mee Hoon|Bee Hoon", "beehoon"), 
+         review = str_replace_all(review, "Bak kut teh|bak kut teh|Bak Kut Teh", "bakkutteh"), 
+         review = str_replace_all(review, "char kuey teow|Char kuey teow|char koay teow|Char Kuey Teow", "charkueyteow"),
+         review = str_replace_all(review, "Hong Kong|hong kong", "hongkong"), 
+         review = str_replace_all(review, "Siew yoke|siew yoke|siu yuk|Siu Yuk", "siewyoke"), 
+         review = str_replace_all(review, "chee cheong fun|Chee cheong fun", "cheecheongfun"), 
+         review = str_replace_all(review, "Kaya toast|kaya toast", "kaya toast"), 
+         review = str_replace_all(review, "Din Tai Fung|din tai fung", "dintaifung"), 
+         review = str_replace_all(review, "Salted egg|salted egg", "saltedegg"), 
+         review = str_replace_all(review, "Kuala Lumpur|kuala lumpur|Kuala lumpur", "kl"), 
+         review = str_replace_all(review, "Xiao long bao|xiao long bao|Xiao Long Bao", "xiaolongbao"), 
+         review = str_replace_all(review, "Chicken rice|chicken rice|Chicken Rice", "chickenrice"), 
+         review = str_replace_all(review, "Foreign workers|foreign workers", "foreignworkers"))
+}
+```
+
+```{r}
+google_chinese_5_star_network <- google_kl_cuisine |> 
+  clean_common_foods() |>  
+  mutate(review_id = row_number()) |> 
+  filter(cuisine == "Chinese" & rating == 5) |> 
+  unnest_tokens(word, review) |> 
+  anti_join(stop_words) |> 
+  filter(str_detect(word, "[a-z]")) |> 
+  add_count(word) |> 
+  filter(n > 15) |> 
+  pairwise_cor(word, review_id, sort = TRUE) |> 
+  filter(correlation >= .15) |> 
+  left_join(
+    google_kl_cuisine |> 
+      clean_common_foods() |> 
+      mutate(review_id = row_number()) |> 
+      filter(cuisine == "Chinese" & rating == 5) |> 
+      unnest_tokens(word, review) |> 
+      anti_join(stop_words) |> 
+      filter(str_detect(word, "[a-z]")) |> 
+      add_count(word) |> 
+      filter(n > 15) |> 
+      pairwise_count(word, review_id, sort = TRUE), 
+    by = c("item1", "item2")
+  ) |> 
+  igraph::graph_from_data_frame() |> 
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(alpha = correlation, edge_width = n), colour = "#457b9d", check_overlap = TRUE) +
+  scale_edge_width_continuous(range = c(.1, 4), trans = "log10") +
+  scale_alpha_continuous(range = c(0.01, 0.08)) +
+  geom_node_point(colour = "#457b9d", alpha = 0.2, size = .5) +
+  geom_node_text(aes(label = ifelse(name %in% 
+                                        c("peak", "service", "experience", 
+                                          "price", "pork", "fresh", "fish",
+                                          "tasted", "recommended", "friendly", "crispy"),
+                                      str_to_title(name),
+                                      "")), 
+                 size = 3.5, 
+                 alpha = .9, 
+                 colour = "#00afb9", 
+                 fontface = "bold") +
+  geom_node_text(aes(label = name), size = 3.1, alpha = .4, 
+                 colour = "#caf0f8") + 
+  theme(legend.position = "none", 
+        plot.caption = element_text(hjust = .5, colour = "#219ebc"), 
+        panel.background = element_rect(fill = "#03071e"), 
+        plot.background = element_rect(fill = "#1b263b"), 
+        plot.title = element_text(colour = "#219ebc"), 
+        plot.subtitle = element_text(colour = "#219ebc", size = 10)) + 
+  labs(title = "Network graph of Five-star Chinese Restaurant Google Review Descriptions", 
+       subtitle = "Line thickness indicates number of events involving those words, line transparency indicates the correlation between words. Key topics highlighted.", 
+       caption = "Source: maps.google.com; Ng Choon Khon")
+
+ggsave(here("plots", "google_chinese_5_star_network_graph.png"), 
+       width = 10, height = 6.5, units = "in", dpi = 300)
+```
+
+tf_idf by cuisine 
+
+```{r}
+google_chinese_1_star_network <- google_kl_cuisine |> 
+  clean_common_foods() |>  
+  mutate(review_id = row_number()) |> 
+  filter(cuisine == "Chinese" & rating == 1) |> 
+  unnest_tokens(word, review) |> 
+  anti_join(stop_words) |> 
+  filter(str_detect(word, "[a-z]")) |> 
+  add_count(word) |> 
+  filter(n > 10) |> 
+  pairwise_cor(word, review_id, sort = TRUE) |> 
+  filter(correlation >= .15) |> 
+  left_join(
+    google_kl_cuisine |> 
+      clean_common_foods() |> 
+      mutate(review_id = row_number()) |> 
+      filter(cuisine == "Chinese" & rating == 1) |> 
+      unnest_tokens(word, review) |> 
+      anti_join(stop_words) |> 
+      filter(str_detect(word, "[a-z]")) |> 
+      add_count(word) |> 
+      filter(n > 10) |> 
+      pairwise_count(word, review_id, sort = TRUE), 
+    by = c("item1", "item2")
+  ) |> 
+  igraph::graph_from_data_frame() |> 
+  ggraph(layout = "fr") + 
+  geom_edge_link(aes(alpha = correlation, edge_width = n), colour = "#457b9d", check_overlap = TRUE) +
+  scale_edge_width_continuous(range = c(.1, 4), trans = "log10") +
+  scale_alpha_continuous(range = c(0.01, 0.08)) +
+  geom_node_point(colour = "#457b9d", alpha = 0.2, size = .5) +
+  geom_node_text(aes(label = ifelse(name %in% 
+                                        c("waited", "service", "experience", 
+                                          "price", "quality", "fresh", 
+                                          "tasted", "disappointing"),
+                                      str_to_title(name),
+                                      "")), 
+                 size = 3.5, 
+                 alpha = .9, 
+                 colour = "#00afb9", 
+                 fontface = "bold") +
+  geom_node_text(aes(label = name), size = 3.1, alpha = .4, 
+                 colour = "#caf0f8") + 
+  theme(legend.position = "none", 
+        plot.caption = element_text(hjust = .5, colour = "#219ebc"), 
+        panel.background = element_rect(fill = "#03071e"), 
+        plot.background = element_rect(fill = "#1b263b"), 
+        plot.title = element_text(colour = "#219ebc"), 
+        plot.subtitle = element_text(colour = "#219ebc", size = 10)) + 
+  labs(title = "Network graph of One-star Chinese Restaurant Google Review Descriptions", 
+       subtitle = "Line thickness indicates number of events involving those words, line transparency indicates the correlation between words. Key topics highlighted.", 
+       caption = "Source: maps.google.com; Ng Choon Khon")
+
+ggsave(here("plots", "google_chinese_1_star_network_graph.png"), 
+       width = 10, height = 6.5, units = "in", dpi = 300)
+```
+
+
+<br>
+
+We see a combination of quite undesirable experiences: smelly, pricey, not fresh, rude, long waits and poor quality. 
+
+```{r}
+trip_chinese_1_star_network <- trip_kl_cuisine |> 
+  clean_common_foods() |>  
+  mutate(review_id = row_number()) |> 
+  filter(cuisine == "Chinese" & rating == 1) |> 
+  unnest_tokens(word, review) |> 
+  anti_join(stop_words) |> 
+  filter(str_detect(word, "[a-z]")) |> 
+  add_count(word) |> 
+  filter(n > 12) |> 
+  pairwise_cor(word, review_id, sort = TRUE) |> 
+  filter(correlation >= .18) |> 
+  left_join(
+    google_kl_cuisine |> 
+      clean_common_foods() |> 
+      mutate(review_id = row_number()) |> 
+      filter(cuisine == "Chinese" & rating == 1) |> 
+      unnest_tokens(word, review) |> 
+      anti_join(stop_words) |> 
+      filter(str_detect(word, "[a-z]")) |> 
+      add_count(word) |> 
+      filter(n > 12) |> 
+      pairwise_count(word, review_id, sort = TRUE), 
+    by = c("item1", "item2")
+  ) |> 
+  igraph::graph_from_data_frame() |> 
+  ggraph(layout = "kk") + 
+  geom_edge_link(aes(alpha = correlation, edge_width = n), colour = "#457b9d", check_overlap = TRUE) +
+  scale_edge_width_continuous(range = c(.1, 4), trans = "log10") +
+  scale_alpha_continuous(range = c(0.01, 0.08)) +
+  geom_node_point(colour = "#457b9d", alpha = 0.2, size = .5) +
+  geom_node_text(aes(label = ifelse(name %in% 
+                                        c("waited", "service", "experience", 
+                                          "price", "quality", "fresh", 
+                                          "tasted", "disappointing"),
+                                      str_to_title(name),
+                                      "")), 
+                 size = 3.5, 
+                 alpha = .9, 
+                 colour = "#00afb9", 
+                 fontface = "bold") +
+  geom_node_text(aes(label = name), size = 3.1, alpha = .4, 
+                 colour = "#caf0f8") + 
+  theme(legend.position = "none", 
+        plot.caption = element_text(hjust = .5, colour = "#219ebc"), 
+        panel.background = element_rect(fill = "#03071e"), 
+        plot.background = element_rect(fill = "#1b263b"), 
+        plot.title = element_text(colour = "#219ebc"), 
+        plot.subtitle = element_text(colour = "#219ebc", size = 10)) + 
+  labs(title = "Network graph of One-star Chinese Restaurant Trip Advisor Review Descriptions", 
+       subtitle = "Line thickness indicates number of events involving those words, line transparency indicates the correlation between words. Key topics highlighted.", 
+       caption = "Source: tripadvisor.com; Ng Choon Khon")
+
+ggsave(here("plots", "trip_chinese_1_star_network_graph.png"), 
+       width = 10, height = 6.5, units = "in", dpi = 300)
+```
+
+
 ## LDA
 
 
-Since reviews are so heavily skewed towards 5 stars, I think we can try and break restaurants down into just two groups: "recommended" and "not recommended". Below, the per-topic-per-word probabilities of individual words have been plotted. 
+Since reviews are so heavily skewed towards 5 stars, let's use topic modelling to break down reviews into just two groups: "recommended" and "not recommended". Below, the per-topic-per-word probabilities of bigrams (two words) in the Google dataset have been plotted. 
+
+Bigrams have been used here because individual words are not as informative ("service" vs. "excellent service"). It seems that our collective vocabularies are limited when it comes to food. Still, 
+
+<br> 
 
 ```{r}
-google_bigrams_dtm <- google_kl_cuisine |> 
-  select(rowid, rating, review, cuisine) |> 
-  unnest_tokens(bigram, review, token = "ngrams", n = 2) |> 
-  filter(!is.na(bigram)) |> 
-  add_count(bigram) |> 
+google_bigrams_dtm <- google_rating_bigrams |>  
   cast_dtm(rating, bigram, n)
 
-google_words_dtm <- google_rating_words |> 
-  cast_dtm(rating, word, n)
+google_bigrams_lda <- 
+  LDA(google_bigrams_dtm, k = 2, control = list(seed = 133))
 
-google_bigrams_lda <- LDA(google_bigrams_dtm, k = 5, control = list(seed = 133))
+google_bigrams_topics <- tidy(google_bigrams_lda, matrix = "beta")
 
-google_words_lda <- LDA(google_words_dtm, k = 2, control = list(seed = 133))
-
-google_ratings_topics <- tidy(google_words_lda, matrix = "beta")
-
-
-google_ratings_topics |> 
+google_bigrams_topics |> 
   group_by(topic) |> 
   slice_max(beta, n = 20) |> 
   ungroup() |> 
   arrange(topic, -beta) |> 
   ggplot(aes(x = beta, y = reorder_within(term, beta, topic), fill = topic)) + 
   geom_col() + 
-  facet_wrap(~ topic, scales = "free") +
+  facet_wrap(~ topic, scales = "free") + 
+  scale_y_reordered() + 
+  labs(title = "Bigram probabilities per topic", 
+       subtitle = "From Google reviews of restaurants in the Klang Valley", 
+       y = "", 
+       x = "Per-topic probability (beta)") + 
+  guides(fill = "none") +
+  theme(strip.background = element_rect(fill = "black"), 
+        strip.text = element_text(size = 10, face = "bold"))
+
+```
+
+```{r}
+google_bigrams_topics |> 
+  group_by(topic) |> 
+  slice_max(beta, n = 20) |> 
+  ungroup() |> 
+  arrange(topic, -beta) |> 
+  ggplot(aes(x = beta, y = reorder_within(term, beta, topic), fill = topic)) + 
+  geom_col() + 
+  facet_wrap(~ topic, scales = "free") + 
   scale_y_reordered()
-  
 ```
 
 
@@ -148,17 +381,12 @@ google_1_topics |>
 
 
 ```{r}
-google_ratings_topics |> 
-  group_by(topic) |> 
-  slice_max(beta, n = 15) |> 
-  ungroup() |> 
-  arrange(topic, -beta)
+google_words_dtm <- google_rating_words |> 
+  cast_dtm(rating, word, n)
 
-google_ratings_topics |> 
-  group_by(topic) |> 
-  slice_max(gamma, n = 15) |> 
-  ungroup() |> 
-  arrange(topic, -gamma)
+google_words_lda <- LDA(google_words_dtm, k = 2, control = list(seed = 133))
+
+google_words_topics <- tidy(google_words_lda, matrix = "beta")
 ```
 
 
@@ -263,15 +491,6 @@ google_rating_words |>
 ```
 
 
-```{r}
-google_kl_cuisine |> 
-  filter(str_detect(review, "clients")) |> 
-  sample_n(5) |> 
-  pull(review)
-```
-
-
-
 
 ```{r fig.height=7}
 
@@ -349,84 +568,7 @@ google_rating_words |>
 ```
 
 
-## One-star reviews by cuisine
 
-Let's start by making use of the column we created in the previous section and look at the relationship between words in the Google reviews dataset. Below, is a network graph of 
-
-```{r}
-clean_common_foods <- function(tbl){
-  tbl |> 
-    mutate(review = str_replace_all(review, "Dim sum|Dim Sum|dim sum", "dimsum"), 
-         review = str_replace_all(review, "Tom Yam|Tom Yum|Tom yam|Tom yum|tom yam|tom yum", "tomyum"), 
-         review = str_replace_all(review, "Char Siew|Char siew|char siew", "charsiew"), 
-         review = str_replace_all(review, "Hokkien mee|Hokkien Mee|hokkien mee", "hokkienmee"), 
-         review = str_replace_all(review, "Roast Duck|Roast duck|roast duck", "roastduck"),
-         review = str_replace_all(review, "Fried Rice|Fried rice|fried rice", "friedrice"), 
-         review = str_replace_all(review, "Roast pork|roast pork|Roast Pork", "roastpork"), 
-         review = str_replace_all(review, "Mee hoon|mee hoon|Bee hoon|bee hoon|Mee Hoon|Bee Hoon", "beehoon"), 
-         review = str_replace_all(review, "Salted egg|salted egg", "saltedegg"), 
-         review = str_replace_all(review, "Xiao long bao|xiao long bao|Xiao Long Bao", "xiaolongbao"), 
-         review = str_replace_all(review, "Chicken rice|chicken rice|Chicken Rice", "chickenrice"), 
-         review = str_replace_all(review, "Foreign workers|foreign workers", "foreignworkers"))
-}
-```
-
-```{r}
-google_chinese_1_star_network <- google_kl_cuisine |> 
-  clean_common_foods() |>  
-  mutate(review_id = row_number()) |> 
-  filter(cuisine == "Chinese" & rating == 1) |> 
-  unnest_tokens(word, review) |> 
-  anti_join(stop_words) |> 
-  filter(str_detect(word, "[a-z]")) |> 
-  add_count(word) |> 
-  filter(n > 10) |> 
-  pairwise_cor(word, review_id, sort = TRUE) |> 
-  filter(correlation >= .15) |> 
-  left_join(
-    google_kl_cuisine |> 
-      clean_common_foods() |> 
-      mutate(review_id = row_number()) |> 
-      filter(cuisine == "Chinese" & rating == 1) |> 
-      unnest_tokens(word, review) |> 
-      anti_join(stop_words) |> 
-      filter(str_detect(word, "[a-z]")) |> 
-      add_count(word) |> 
-      filter(n > 10) |> 
-      pairwise_count(word, review_id, sort = TRUE), 
-    by = c("item1", "item2")
-  ) |> 
-  igraph::graph_from_data_frame() |> 
-  ggraph(layout = "fr") + 
-  geom_edge_link(aes(alpha = correlation, edge_width = n), colour = "#457b9d", check_overlap = TRUE) +
-  scale_edge_width_continuous(range = c(.1, 4), trans = "log10") +
-  scale_alpha_continuous(range = c(0.01, 0.08)) +
-  geom_node_point(colour = "#457b9d", alpha = 0.2, size = .5) +
-  geom_node_text(aes(label = ifelse(name %in% 
-                                        c("waited", "service", "experience", 
-                                          "price", "quality", "fresh", 
-                                          "tasted", "disappointing"),
-                                      str_to_title(name),
-                                      "")), 
-                 size = 3.5, 
-                 alpha = .9, 
-                 colour = "#00afb9", 
-                 fontface = "bold") +
-  geom_node_text(aes(label = name), size = 3.1, alpha = .4, 
-                 colour = "#caf0f8") + 
-  theme(legend.position = "none", 
-        plot.caption = element_text(hjust = .5, colour = "#219ebc"), 
-        panel.background = element_rect(fill = "#03071e"), 
-        plot.background = element_rect(fill = "#1b263b"), 
-        plot.title = element_text(colour = "#219ebc"), 
-        plot.subtitle = element_text(colour = "#219ebc", size = 10)) + 
-  labs(title = "Network graph of One-star Chinese Restaurant Google Review Descriptions", 
-       subtitle = "Line thickness indicates number of events involving those words, line transparency indicates the correlation between words. Key topics highlighted.", 
-       caption = "Source: maps.google.com; Ng Choon Khon")
-
-ggsave(here("plots", "google_chinese_1_star_network_graph.png"), 
-       width = 10, height = 6.5, units = "in", dpi = 300)
-```
 
 ```{r}
 trip_kl_cuisine |> 
