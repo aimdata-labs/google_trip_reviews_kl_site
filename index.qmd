@@ -153,7 +153,7 @@ Let's review the limitations once more, before we look into these datasets:
 
 * These reviews were extracted three years ago: some of these restaurants have closed, or have changed how they operate.  
 
-* Whilst reviews themselves are largely meant to informational, expressive or cautionary, review platforms are mired in layers of obfuscation, gamification and marketing. Additionally, Google's reviews are generally less policed than Trip Advisor's, with notable instances of [scams]((https://www.asiaone.com/lifestyle/restaurant-ibid-woo-wai-leong-police-reviews-scam)) and bribed reviews. Additionally, reviews are further affected by prevailing social mores (leniency bias and the skew towards five stars). 
+* Whilst reviews themselves are largely meant to informational, expressive or cautionary, review platforms are mired in layers of obfuscation, gamification and marketing. Additionally, Google's reviews are generally less policed than Trip Advisor's, with notable instances of [scams]((https://www.asiaone.com/lifestyle/restaurant-ibid-woo-wai-leong-police-reviews-scam)) and bribed reviews. Additionally, reviews are further affected by prevailing social mores (we discuss the skew towards five stars below). 
 
 
 ```{r buffet-fusion-lists}
