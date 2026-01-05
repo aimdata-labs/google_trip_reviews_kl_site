@@ -52,7 +52,7 @@ trip_reviews <- read_csv("./data/TripAdvisor_data_cleaned.csv") |> clean_names()
 
 ## Introduction and overview
 
-A common refrain for this postmodern age is that online reviews are useless. 
+A common refrain in this postmodern age is that online reviews are useless. 
 
 Today, we're looking at two different sets of scraped restaurant reviews to determine to what extent that is true. Restaurant reviews from Google and Trip Advisor in Malaysia were scraped by [Ng Choon Khon](https://www.kaggle.com/datasets/choonkhonng/malaysia-restaurant-review-datasets) using the Selenium library. 
 
@@ -460,11 +460,11 @@ trip_kl_cuisine |>
   coord_flip() +
   
   plot_annotation(
-    title = "Similar distributions of review ratings",
+    title = "Similar distributions of review ratings in Google and Trip Advisor",
     subtitle = "Only includes restaurants in the Klang Valley."
   )
 
-
+ggsave("./plots/ratings_summary.png", height = 4, width = 7, units = "in")
 ```
 
 <br>

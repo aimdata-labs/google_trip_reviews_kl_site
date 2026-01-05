@@ -1,0 +1,14 @@
+"0","ggplot(""./plots/ratings_summary.png"", height = 7, width = 11, units = ""in"")
+"
+"1","[1m[33mError[39m in `fortify()`:[22m
+[38;5;238m[33m![38;5;238m `data` must be a [34m<data.frame>[38;5;238m, or an object coercible by `fortify()`, or a valid
+  [34m<data.frame>[38;5;238m-like object coercible by `as.data.frame()`.[39m
+[1mCaused by error in `.prevalidate_data_frame_like_object()`:[22m
+[38;5;238m[33m![38;5;238m `dim(data)` must return an [34m<integer>[38;5;238m of length 2.[39m
+Backtrace:
+[90m  1. [39mggplot2::ggplot(...)
+[90m  2. [39mggplot2:::ggplot.default(...)
+[90m  4. [39m[1m[94mggplot2:::fortify.default([39m[22mdata, ...[1m[94m)[39m[22m
+[90m 11. [39mggplot2:::validate_as_data_frame(model)
+[90m 12. [39m[1m[94mggplot2:::.prevalidate_data_frame_like_object([39m[22mdata[1m[94m)[39m[22m
+"
