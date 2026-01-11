@@ -96,5 +96,12 @@
     "title": "How useful are restaurant reviews? Google and Trip Advisor reviews in the Klang Valley, Malaysia",
     "section": "Appendices",
     "text": "Appendices\n“Hot” and “cold” has to do with underprepared and/or microwaved food\n\n\n\n\nClick image for full size\n\n\n\n“Cold” shows up again under one-star reviews of Casual Western restaurants, indicating poor attention to detail and/or rushed food preparation.\n\n\n\n\nClick image for full size"
+  },
+  {
+    "objectID": "part_two_words.html#draft-words",
+    "href": "part_two_words.html#draft-words",
+    "title": "How useful are restaurant reviews? Google and Trip Advisor reviews in the Klang Valley, Malaysia",
+    "section": "",
+    "text": "In this second part of our analysis, we’ll be doing some text analytics. To recap, we are using data scraped by Ng Choon Khon containing restaurant reviews in Malaysia on Google and Trip Advisor. Take a look at the first part of this analysis to see the limitations.\nLet’s first take a step back and get an overview of the most common bigrams (two consecutive words) that appear in Google reviews, broken down by rating.\nThere isn’t too much in the plot below that is unexpected. However, it should be noted that our collective vocabulary, when it comes to restaurant reviews, is quite limited: “nice food” could indicate anything between three stars and five.\nService, and not just food quality, is a major determinant in one-star ratings. This perhaps could be one of the reasons why fine dining restaurants have higher floors and ceilings for their ratings than more casual dining options.\n\n\n\n\n\n\n\n\n\n\n\nWhilst ratings might be very lenient overall – cheapening a five-star rating – we can at least say that there are also qualitative differences between five-star and one-star reviews."
   }
 ]

@@ -98,7 +98,7 @@ trip_rating_bigrams <- read_csv("./data/trip_rating_bigrams.csv")
 
 ```
 
-## Words
+## DRAFT: Words
 
 In this second part of our analysis, we'll be doing some text analytics. To recap, we are using data scraped by [Ng Choon Khon](https://www.kaggle.com/datasets/choonkhonng/malaysia-restaurant-review-datasets) containing restaurant reviews in Malaysia on Google and Trip Advisor. Take a look at the [first part](https://aimdata-labs.github.io/google_trip_reviews_kl_site/) of this analysis to see the limitations. 
 
