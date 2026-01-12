@@ -133,6 +133,8 @@ google_rating_bigrams |>
   labs(x = "Count", 
        y = "", 
        title = "Most common bigrams by rating, Google reviews")
+
+ggsave("./plots/common_bigrams_google.png", height = 5, width = 7, units = "in")
   
 ```
 
@@ -479,6 +481,8 @@ There is, however, one keyword that does work.
 
 ## "Highly recommended restaurant" (sic)
 
+<br>
+
 [![What directory mode looks like](./plots/directory_mode.png)](https://raw.githubusercontent.com/aimdata-labs/google_trip_reviews_kl_site/main/plots/directory_mode.png)
 
 <br>
@@ -518,7 +522,7 @@ For reference, Google Maps's base algorithm (which is used when you type in "res
 
 But back to "directory" mode: even though you get more satisfactory results, bear in mind that the Google rating has already been taken into account twice: ratings are part of how Google calculates "Prominence" and the algorithm also applies a rating filter. 
 
-That it does not solely act like a keyword is likely to prevent more manipulation and SEO shenanigans. So far, I've only been able to trigger "directory" mode with this one phrase. What else can trigger **Directory mode** on Google Maps? In these trying times, could some variation of "reasonable price restaurant" work?
+That it does not solely act like a keyword is likely to prevent more manipulation and SEO shenanigans. So far, I've only been able to trigger **Directory mode** with this one phrase. What else can trigger **Directory mode** on Google Maps? In these trying times, could some variation of "reasonable price restaurant" work?
 
 
 
@@ -526,13 +530,13 @@ That it does not solely act like a keyword is likely to prevent more manipulatio
 
 ## Conclusions part two
 
-Online reviews are part of a highly-gamified ecosystem. Standard searches will leave you at the mercy of content pushed by SEO, influencers and a black-box algorithm. 
+Online reviews are part of a highly-gamified ecosystem. Standard searches will leave you at the mercy of content pushed by SEO, influencers and black-box algorithms. 
 
-Whilst there are ways around this, like directory mode, ultimately, the system fundamentally does not seem to be geared towards the needs of customers (especially not if you need tips and tricks just to get passable performance). Customisation occurs mostly on the back-end: there is no way to tell Google what is relevant to you. Instead, they glean this from your online footprint, believing you will unconsciously betray your wants and needs to them.
+Whilst there are ways around this, like directory mode, ultimately, the system fundamentally does not seem to be geared towards the needs of customers (especially not if you need tips and tricks just to get passable performance). Customisation occurs mostly on the back-end: there is no way to tell Google what ypu consider relevant to you. Instead, they glean this from your online footprint, believing you will unconsciously betray your wants and needs to them.
 
-Therein lies the rub. Just because you know my race, my sex, my income, whether or not I'm pregnant, and can put me into one of their numerous categories and clusters does not mean you know me as a person, or even as a customer. You could argue that this widespread data theft might not lead to the best results for one person, but that it is used to produce apps and algorithms that are able to serve the majority well. 
+Therein lies the rub. Just because you know my sex, my income, whether or not I'm pregnant, and can put me into one of their numerous categories and clusters does not mean you know me as a person, or even as a customer. You could argue that this widespread data theft might not lead to the best results for one person, but that it is used to produce apps and algorithms that are able to serve the majority well. 
 
-I do not think Google Reviews serve the majority well. Part of this has to do with the fact that online reviews are not solely about food. It is an "experience" that must be upsold and marketed to you. In trying to be Instagram, they have forgotten how to be a map, a directory.  
+But I do not think Google Reviews serve the majority well. This has to do with the fact that online reviews are not solely about food. It is an "experience" that must be upsold and marketed to you. In trying to be Instagram, they have forgotten how to be a map, a directory. The wanton privileging of photos and influencer reels is not helpful when I just want a good meal. 
 
 So, are online reviews useful? Maybe 3/5. 
 
@@ -578,11 +582,11 @@ trip_rating_bigrams |>
 ```
 <br>
 
-Just as an interesting point, when we look at one-star Trip Advisor reviews for Casual Western restaurants, we see the words "hot" and "cold" be quite prominent. 
+Just as an interesting point, when we look at one-star Trip Advisor reviews for Casual Western restaurants, we see that the words "hot" and "cold" are quite prominent. 
 
-I believe this has to do with underprepared and/or improperly microwaved food. Microwaved food, bought from a food service or brought from a central kitchen, is one of the sad curses of modern dining. Waves of consolidation up and down the restaurant supply chain have left all hawkers in Singapore with one choice of yellow mee or only one type of bee hoon. In America, US Foods and Sysco have completely sewn up the supply chain, leading to all jalapeño poppers and mozarella sticks coast-to-coast to be the exact same. 
+I believe this has to do with underprepared and/or improperly microwaved food. Microwaved food, often bought from a food service or brought from a central kitchen, is one of the sad curses of modern dining. Waves of consolidation up and down the restaurant supply chain have left all hawkers in Singapore with one choice of yellow mee or only one type of bee hoon. In America, US Foods and Sysco have completely sewn up the supply chain, leading to all jalapeño poppers and mozarella sticks coast-to-coast to be the exact same. 
 
-Whilst that level of corporate consolidation has not yet occurred in Malaysia, the process is nevertheless underway. 
+Whilst that level of corporate consolidation has not yet occurred in Malaysia, the process is nevertheless underway. This is something we must guard against, as homogeneity isn't even prized in prison meals. 
 
 <br>
 
@@ -645,7 +649,7 @@ ggsave(here("plots", "trip_casual_western_1_star_network_graph.png"),
 
 <br>
 
-"Cold" shows up again under one-star Google reviews of Casual Western restaurants, indicating poor attention to detail and/or rushed food preparation. 
+"Cold" shows up again under one-star Google reviews of Casual Western restaurants, indicating poor attention to detail and/or rushed food preparation. Though it doesn't necessarily point towards microwaved foods. 
 
 As a side note (in an appendix), there is a way to microwave food well -- apparently using the defrost setting achieves the most even cooking. 
 
