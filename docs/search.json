@@ -88,14 +88,14 @@
     "href": "part_two_words.html#conclusions-part-two",
     "title": "How useful are restaurant reviews? Google and Trip Advisor reviews in the Klang Valley, Malaysia",
     "section": "Conclusions part two",
-    "text": "Conclusions part two\nNormal searches on Google Maps leave you at the mercy of a highly-gamified system.\nFood is not just food. It is an “experience” that must be marketed and upsold to you. Are online reviews useful? Maybe 3/5.\nSearching an area in Google Maps for “highly recommended restaurant” (sic) in Android and “recommended restaurant” (sic) in iOS can trigger “directory” mode.\nRegarding fine dining restaurants having higher floors, with the bigram “fine dining” show up under 2-star reviews, likely because people are unwilling to give a fine dining restaurant a 1-star review.\nThe most common bigrams (two words) per rating have been plotted below. Unfortunately, they’re very informative.\nWithin Trip Advisor, we see certain commonalities in the language used, irrespective of rating. Additionally, we see that Trip Advisor reviewers tend to pay more attention to service than Google. The bigram “dining experience” appears across all ratings. We see a lot of bigrams related to wait times (“20 minutes”, “30 minutes” etc.) in one-star and two-star reviews. However, as with the bigrams in Google reviews,"
+    "text": "Conclusions part two\nNormal searches on Google Maps leave you at the mercy of a highly-gamified system.\nSearching an area in Google Maps for “highly recommended restaurant” (sic) in Android and “recommended restaurant” (sic) in iOS can trigger “directory” mode.\nFood is not just food. It is an “experience” that must be marketed and upsold to you. Are online reviews useful? Maybe 3/5."
   },
   {
     "objectID": "part_two_words.html#appendices",
     "href": "part_two_words.html#appendices",
     "title": "How useful are restaurant reviews? Google and Trip Advisor reviews in the Klang Valley, Malaysia",
     "section": "Appendices",
-    "text": "Appendices\n“Hot” and “cold” has to do with underprepared and/or microwaved food\n\n\n\n\nClick image for full size\n\n\n\n“Cold” shows up again under one-star reviews of Casual Western restaurants, indicating poor attention to detail and/or rushed food preparation.\n\n\n\n\nClick image for full size"
+    "text": "Appendices\nWithin Trip Advisor, we see certain commonalities in the language used, irrespective of rating. Additionally, we see that Trip Advisor reviewers tend to pay more attention to service than Google. The bigram “dining experience” appears across all ratings. We see a lot of bigrams related to wait times (“20 minutes”, “30 minutes” etc.) in one-star and two-star reviews. However, as with the bigrams in Google reviews,\n\n\n\n\n\n\n\n\n\n“Hot” and “cold” has to do with underprepared and/or microwaved food\n\n\n\n\nClick image for full size\n\n\n\n“Cold” shows up again under one-star reviews of Casual Western restaurants, indicating poor attention to detail and/or rushed food preparation.\n\n\n\n\nClick image for full size"
   },
   {
     "objectID": "part_two_words.html#draft-words",
