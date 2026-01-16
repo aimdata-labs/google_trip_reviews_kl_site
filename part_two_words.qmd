@@ -483,7 +483,7 @@ However, this isn't all that applicable to real life, since you can't search all
 
 This is another point in favour of online reviews just being a marketing ploy. Not to say that marketing ploys cannot be informative, just that their information is compromised. 
 
-There is, however, one keyword that does work. 
+There is, however, one keyword search that does work. 
 
 
 <br><br><br>
@@ -496,9 +496,9 @@ There is, however, one keyword that does work.
 
 <br>
 
-Type in "highly recommended restaurant" (sic) into Google Maps (or "recommended restaurant" on iOS) and see what you get. I get a list of some pretty good restaurants, with no photos. I don't agree with every entry, this "directory" mode is probably the best (but still flawed) performance I've seen from Google Maps in a long time. 
+Type in "highly recommended restaurant" (sic) into Google Maps (or "recommended restaurant" on iOS) and see what you get. I get a list of some pretty good restaurants, with no photos. I don't agree with every entry, but this "directory" mode is probably the best (but still flawed) performance I've seen from Google Maps in a long time. 
 
-Now, this may seem like we've somehow gamed the system, but to bring us back down to Earth, this list of highly recommended restaurants is actually still part of the play, according to Gemini (Google Maps Support has no real answers on this topic): 
+Now, this may seem like we've somehow gamed the system, but to bring us back down to Earth, this list of highly recommended restaurants is very much part of the play, according to Gemini (Google Maps Support has no real answers on this topic): 
 
 >When you type "highly recommend restaurant" into the search bar, Google Maps interprets those words as keywords rather than a command. Instead of looking for a specific badge, the app uses its algoritm to build a list based on several "trust signals."
 
@@ -520,7 +520,7 @@ When not in "directory" mode, the factors that Google Maps takes into account ar
 >3. AI Dish Matching
 >4. High Engagement Signals. [...] Google rewards businesses that have high engagement. If a restaurant has 1,000 photos uploaded by customers, Google has a huge library to make the search result look more attractive and "trustworthy" to you. 
 
-This is likely why searching for "best restaurant" yields such poor results. You're probably getting results that are more easily manipulated and influenced i.e. upload a photo for a free ice cream. 
+This is likely why searching for "best restaurant" yields such poor results. You're probably getting results that are more easily manipulated and influenced i.e. upload a review and a photo for a free ice cream. 
 
 For reference, Google Maps's base algorithm (which is used when you type in "restaurants in area X") relies on: 
 
