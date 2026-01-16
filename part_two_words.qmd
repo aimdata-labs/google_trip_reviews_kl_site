@@ -498,16 +498,16 @@ There is, however, one keyword search that does work.
 
 Type in "highly recommended restaurant" (sic) into Google Maps (or "recommended restaurant" on iOS) and see what you get. I get a list of some pretty good restaurants, with no photos. I don't agree with every entry, but this "directory" mode is probably the best (but still flawed) performance I've seen from Google Maps in a long time. 
 
-Now, this may seem like we've somehow gamed the system, but to bring us back down to Earth, this list of highly recommended restaurants is very much part of the play, according to Gemini (Google Maps Support has no real answers on this topic): 
+Now, this may seem like we've somehow gamed the system, but to bring us back down to Earth, this list of highly recommended restaurants is still very much part of the play, according to Gemini (Google Maps Support has no real answers on this topic): 
 
->When you type "highly recommend restaurant" into the search bar, Google Maps interprets those words as keywords rather than a command. Instead of looking for a specific badge, the app uses its algoritm to build a list based on several "trust signals."
+>When you type "highly recommend restaurant" into the search bar, Google Maps interprets those words as keywords rather than a command. Instead of looking for a specific badge, the app uses its algorithm to build a list based on several "trust signals."
 
 >1. Keyword matching (SEO) [...] "This place is highly recommended" [...]
->2. High "Prominence" Scores. Google defines "Prominence" as how well-known or important a business is. When you ass "highly recommended" to your search, the algorithm prioritizes restaurants with: high volume of 4.5+ star ratings. Mentions on "Best Of" lists [...]. Heavy foot traffic (Google tracks how many people acturally visit the location). 
+>2. High "Prominence" Scores. Google defines "Prominence" as how well-known or important a business is. When you ass "highly recommended" to your search, the algorithm prioritizes restaurants with: high volume of 4.5+ star ratings. Mentions on "Best Of" lists [...]. Heavy foot traffic (Google tracks how many people actually visit the location). 
 > 3. The "Top Rated" Filter. By using that specific phrase, you are essentially triggering Google's built-in Rating Filter. Google will automatically filter out businesses with low ratings (usually anything below a 4.0) [...].
 >4. Machine Learning & "Your Match"[...]
 
-They have also included a "Review Snippet" so you can tell why a particular restaurant made it to this list. Also note from these screenshots that the actual rating is not that important: restaurants are in the range of 4.0 to 5.0, but that's about it, as if Google also knows that the mean rating is not a particularly useful metric. 
+They have also included a "Review Snippet" so you can tell why a particular restaurant made it to this list. Also note from these screenshots that the actual rating is not that important: restaurants are in the range of 4.0 to 5.0, but that's about it, as if Google already knows that the mean rating is not a particularly useful metric. 
 
 Conversely, when you type in "highly recommended restaurants" or just "highly recommended", 
 
@@ -516,13 +516,13 @@ Conversely, when you type in "highly recommended restaurants" or just "highly re
 When not in "directory" mode, the factors that Google Maps takes into account are not desirable (at least by me):
 
 >1. Visual "proof" of recommendation. Google's AI specifically pulls photos it identifies as "high quality"
->2. The "Discover Through Photos" feature. [...] When you use subjective search terms (like *highly recommended*, *beautiful*, *cozy*), Google assumes yuou want to browse visually. 
+>2. The "Discover Through Photos" feature. [...] When you use subjective search terms (like *highly recommended*, *beautiful*, *cozy*), Google assumes you want to browse visually. 
 >3. AI Dish Matching
 >4. High Engagement Signals. [...] Google rewards businesses that have high engagement. If a restaurant has 1,000 photos uploaded by customers, Google has a huge library to make the search result look more attractive and "trustworthy" to you. 
 
 This is likely why searching for "best restaurant" yields such poor results. You're probably getting results that are more easily manipulated and influenced i.e. upload a review and a photo for a free ice cream. 
 
-For reference, Google Maps's base algorithm (which is used when you type in "restaurants in area X") relies on: 
+For reference, Google Maps' base algorithm (which is used when you type in "restaurants in area X") relies on: 
 
 >1. Distance
 >2. Relevance. [...] Category matching, [...] Menu and Attributes, [...] Open Now
@@ -541,11 +541,13 @@ That it does not solely act like a keyword is likely to prevent more manipulatio
 
 Online reviews are part of a highly-gamified ecosystem. Standard searches will leave you at the mercy of content pushed by SEO, influencers and black-box algorithms. 
 
-Whilst there are ways around this, like directory mode, ultimately, the system fundamentally does not seem to be geared towards the needs of customers (especially not if you need tips and tricks just to get passable performance). Customisation occurs mostly on the back-end: there is no way to tell Google what ypu consider relevant to you. Instead, they glean this from your online footprint, believing you will unconsciously betray your wants and needs to them.
+Whilst there are ways around this, like directory mode, ultimately, the system fundamentally does not seem to be geared towards the needs of customers (especially not if you need tips and tricks just to get passable performance). Customisation occurs mostly on the back-end: there is no way to tell Google what you consider to be relevant. Instead, they glean this from your online footprint, believing you will unconsciously betray your wants and needs to them.
 
-Therein lies the rub. Just because you know my sex, my income, whether or not I'm pregnant, and can put me into one of their numerous categories and clusters does not mean you know me as a person, or even as a customer. You could argue that this widespread data theft might not lead to the best results for one person, but that it is used to produce apps and algorithms that are able to serve the majority well. 
+You could argue that though this widespread data theft might not lead to the best results for one person, it is still used to produce apps and algorithms that are able to serve the majority well. But I would dispute this. 
 
-But I do not think Google Reviews serve the majority well. This has to do with the fact that online reviews are not solely about food. It is an "experience" that must be upsold and marketed to you. In trying to be Instagram, they have forgotten how to be a map, a directory. The wanton privileging of photos and influencer reels is not helpful when I just want a good meal. 
+Online food reviews are very clearly not only about food. Dining is an "experience" that must be upsold and marketed to you. The wanton privileging of photos and influencer reels is not helpful when I want good food. The Instagrammification of food is not something Google and Trip Advisor are solely responsible for. But it is something that they have leaned into, acting more like a marketing platform than directories. 
+
+But you protest: this makes it so that reviews have more eyeballs on them and can capture more of the attention economy! Those are perverse KPIs. Having more eyes on a product or an app doesn't automatically make it better. Just because you make something habit-forming doesn't mean you've made it good. 
 
 So, are online reviews useful? Eh. 2/5. 
 
